@@ -3,6 +3,9 @@ import { useState } from 'react';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
+// store https secure only: https://stackoverflow.com/questions/69294536/where-to-store-jwt-token-in-react-client-side-in-secure-way
+// react request: https://github.com/bilguun-zorigt/React-GraphQL-JWT-Authentication-Example/blob/main/src/modAuth/login.jsx
+
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
