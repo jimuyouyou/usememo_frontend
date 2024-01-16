@@ -13,6 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "\nmutation User {\n  login(data: { email: \"lisa@simpson.com\", password: \"secret42\" }) {\n    ...AuthTokens\n  }\n}\n\nfragment UserData on User {\n  id\n  email\n}\n\nfragment AuthTokens on Auth {\n  accessToken\n  refreshToken\n  user {\n    ...UserData\n  }\n}\n": types.UserDocument,
     "\n  query UserPosts {\n    userPosts(id: \"clrctnggg0000oprtx7qti2vr\") {\n      ...PostData\n    }\n  }\n\n  fragment PostData on Post {\n    id\n    createdAt\n    updatedAt\n    published\n    title\n    content\n  }\n": types.UserPostsDocument,
 };
 
@@ -30,6 +31,10 @@ const documents = {
  */
 export function gql(source: string): unknown;
 
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\nmutation User {\n  login(data: { email: \"lisa@simpson.com\", password: \"secret42\" }) {\n    ...AuthTokens\n  }\n}\n\nfragment UserData on User {\n  id\n  email\n}\n\nfragment AuthTokens on Auth {\n  accessToken\n  refreshToken\n  user {\n    ...UserData\n  }\n}\n"): (typeof documents)["\nmutation User {\n  login(data: { email: \"lisa@simpson.com\", password: \"secret42\" }) {\n    ...AuthTokens\n  }\n}\n\nfragment UserData on User {\n  id\n  email\n}\n\nfragment AuthTokens on Auth {\n  accessToken\n  refreshToken\n  user {\n    ...UserData\n  }\n}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
