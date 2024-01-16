@@ -12,13 +12,27 @@ const Login: React.FC = () => {
   const [isSignup, setIsSignup] = useState(false);
   const [error, setError] = useState("");
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     // Basic email and password validation
     if (!email.trim() || !password.trim()) {
       setError("Please enter both email and password.");
       return;
     }
 
+    const res = await fetch('api/user/login', {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email.trim(),
+        password: password.trim(),
+      }),
+    });
+
+    const data = await res.json();
+    console.log('data', data);
     // Add your login logic here (e.g., API call, authentication)
     console.log(`Logging in with email: ${email} and password: ${password}`);
   };

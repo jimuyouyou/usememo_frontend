@@ -43,3 +43,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## JWT
 [React-GraphQL-JWT-Authentication-Example](https://github.com/bilguun-zorigt/React-GraphQL-JWT-Authentication-Example)
+
+## Response vs NextResponse vs NextAPIResponse
+- Response: [general](https://developer.mozilla.org/en-US/docs/Web/API/Response)
+- NextResponse: [next general](https://nextjs.org/docs/pages/api-reference/functions/next-response)
+- NextAPIResponse: [next api](https://nextjs.org/docs/pages/building-your-application/routing/api-routes)
+- [Diff](https://stackoverflow.com/questions/77332669/use-nextresponse-response-or-nextapiresponse-in-returning-get-and-data-in-next)
