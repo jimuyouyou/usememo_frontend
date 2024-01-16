@@ -1,7 +1,9 @@
-"use client"
-import { useState } from 'react';
+"use client";
+import { useState } from "react";
+import { useRouter } from 'next/navigation';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { setAccessToken } from "../lib/apolloClient";
 
 // store https secure only: https://stackoverflow.com/questions/69294536/where-to-store-jwt-token-in-react-client-side-in-secure-way
 // react request: https://github.com/bilguun-zorigt/React-GraphQL-JWT-Authentication-Example/blob/main/src/modAuth/login.jsx
@@ -12,6 +14,8 @@ const Login: React.FC = () => {
   const [isSignup, setIsSignup] = useState(false);
   const [error, setError] = useState("");
 
+  const router = useRouter();
+
   const handleLogin = async () => {
     // Basic email and password validation
     if (!email.trim() || !password.trim()) {
@@ -19,7 +23,7 @@ const Login: React.FC = () => {
       return;
     }
 
-    const res = await fetch('api/user/login', {
+    const res = await fetch("api/user/login", {
       method: "POST",
       headers: {
         Accept: "application/json, text/plain, */*",
@@ -31,8 +35,14 @@ const Login: React.FC = () => {
       }),
     });
 
+    // set jwt token into following gql headers
     const data = await res.json();
-    console.log('data', data);
+    if (data && data.accessToken) {
+      setAccessToken();
+      router.push('/dashboard');
+    }
+    console.log("data", data);
+
     // Add your login logic here (e.g., API call, authentication)
     console.log(`Logging in with email: ${email} and password: ${password}`);
   };

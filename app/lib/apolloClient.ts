@@ -1,18 +1,47 @@
-// lib/apolloClient.ts
+import {
+  ApolloClient,
+  InMemoryCache,
+  NormalizedCacheObject,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 
-import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { createHttpLink } from '@apollo/client/link/http';
-// import fetch from 'isomorphic-unfetch';
+let apolloClient: ApolloClient<NormalizedCacheObject>;
 
-const httpLink = createHttpLink({
-  uri: "http://localhost:3000/graphql",
-  fetch,
-});
+const createApolloClientInstance = () => {
+  if (!apolloClient) {
+    const httpLink = createHttpLink({
+      uri: "http://localhost:3000/graphql", // Replace with your GraphQL endpoint
+    });
 
-const apolloClient = new ApolloClient({
-  ssrMode: true,
-  link: httpLink,
-  cache: new InMemoryCache(),
-});
+    apolloClient = new ApolloClient({
+      link: httpLink,
+      cache: new InMemoryCache(),
+    });
+  }
 
-export default apolloClient;
+  return apolloClient;
+};
+
+export const createApolloClient = () => {
+  return createApolloClientInstance();
+};
+
+export const setAccessToken = () => {
+  const accessToken = getCookieValue("jwt");
+
+  if (accessToken) {
+    apolloClient.setLink(
+      setContext(() => ({
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }))
+    );
+  }
+};
+
+const getCookieValue = (name: string) => {
+  const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+  return match ? match[2] : null;
+};

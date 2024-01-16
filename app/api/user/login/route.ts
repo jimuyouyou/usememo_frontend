@@ -1,26 +1,28 @@
 import { NextRequest, NextResponse } from "next/server";
-import { gql } from '@apollo/client';
-import apolloClient from '../../../lib/apolloClient';
+import { gql } from "@apollo/client";
+import { createApolloClient } from "../../../lib/apolloClient";
+
+const apolloClient = createApolloClient();
 
 const LOG_IN = gql`
-mutation User {
-  login(data: { email: "lisa@simpson.com", password: "secret42" }) {
-    ...AuthTokens
+  mutation User {
+    login(data: { email: "lisa@simpson.com", password: "secret42" }) {
+      ...AuthTokens
+    }
   }
-}
 
-fragment UserData on User {
-  id
-  email
-}
-
-fragment AuthTokens on Auth {
-  accessToken
-  refreshToken
-  user {
-    ...UserData
+  fragment UserData on User {
+    id
+    email
   }
-}
+
+  fragment AuthTokens on Auth {
+    accessToken
+    refreshToken
+    user {
+      ...UserData
+    }
+  }
 `;
 
 export async function POST(request: NextRequest) {
@@ -28,8 +30,8 @@ export async function POST(request: NextRequest) {
   const res = await request.json();
 
   // gql mutation
-  const { data } = await apolloClient.mutate({mutation: LOG_IN});
-  console.log('apollo data', data);
+  const { data } = await apolloClient.mutate({ mutation: LOG_IN });
+  console.log("apollo data", data);
 
   // Set json response first
   const response = NextResponse.json(
@@ -42,7 +44,7 @@ export async function POST(request: NextRequest) {
   // Then set a cookie
   response.cookies.set({
     name: "jwt",
-    value: "token",
+    value: data.login.accessToken,
     httpOnly: true,
     maxAge: 60 * 60,
   });
