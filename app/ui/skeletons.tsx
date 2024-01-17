@@ -82,6 +82,18 @@ export function LatestInvoicesSkeleton() {
   );
 }
 
+export function BlankSkeleton() {
+  return (
+    <>
+      <div
+        className={`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-gray-100`}
+      />
+      To be continued...
+    </>
+  );
+}
+
+
 export default function DashboardSkeleton() {
   return (
     <>

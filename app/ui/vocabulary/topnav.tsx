@@ -1,29 +1,29 @@
 'use client';
 
+import Link from "next/link";
+import NavLinks from "@/app/ui/dashboard/nav-links";
+import AcmeLogo from "@/app/ui/acme-logo";
+import { PowerIcon } from "@heroicons/react/24/outline";
+import { signOut } from "@/auth";
+import { usePathname } from 'next/navigation';
+
 import {
   UserGroupIcon,
   HomeIcon,
   DocumentDuplicateIcon,
   DocumentTextIcon,
 } from '@heroicons/react/24/outline';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 
-// Map of links to display in the side navigation.
-// Depending on the size of the application, this would be stored in a database.
 const links = [
-  { name: 'Home', href: '/dashboard', icon: HomeIcon },
-  { name: 'Vocabulary', href: '/dashboard/vocabulary', icon: DocumentTextIcon },
-  {
-    name: 'Invoices',
-    href: '/dashboard/invoices',
-    icon: DocumentDuplicateIcon,
-  },
-  { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon },
+  { name: 'New Set', href: '/dashboard/vocabulary/set/create', icon: HomeIcon },
+  { name: 'New Folder', href: '/dashboard/vocabulary/folder/create', icon: DocumentTextIcon },
+  { name: 'All Folders', href: '/dashboard/vocabulary/folder/all', icon: DocumentTextIcon },
+  
 ];
 
-export default function NavLinks() {
+
+export default function TopNav() {
   const pathname = usePathname();
 
   return (
