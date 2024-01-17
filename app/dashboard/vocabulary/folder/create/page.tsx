@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useState } from "react";
 import { Metadata } from "next";
 import { fetchFilteredCustomers } from "@/app/lib/data";
@@ -17,15 +17,24 @@ export default async function Page({
     page?: string;
   };
 }) {
-  // const [pageType, setPageType] = useState("LATEST_SETS");
+  const [folderName, setFolderName] = useState("");
+  const handleClick = () => {
+    
+  };
 
   return (
     <main>
       <TopNav />
-        <section>
-          <h3>New Folder</h3>
-          <input type="text" placeholder="Input your folder name here"></input>
-        </section>
+      <section>
+        <h3>New Folder</h3>
+        <input
+          type="text"
+          name="folderName"
+          value={folderName}
+          placeholder="Input your folder name here"
+          onClick={handleClick}
+        />
+      </section>
     </main>
   );
 }
