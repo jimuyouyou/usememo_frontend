@@ -1,3 +1,5 @@
+import { getSession, GetSessionParams } from "next-auth/react";
+import { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest, NextResponse } from "next/server";
 import { gql } from "@apollo/client";
 import { createApolloClient } from "../../../lib/apolloClient";
@@ -45,6 +47,41 @@ export async function POST(request: NextRequest) {
   response.cookies.set({
     name: "jwt",
     value: data.login.accessToken,
+    httpOnly: true,
+    maxAge: 60 * 60,
+  });
+
+  return response;
+}
+
+export async function GET(req: NextApiRequest, res: NextApiResponse) {
+  // res.
+  const session = await getSession({ req } as GetSessionParams); // 
+  console.log("s0".repeat(10), session);
+  if (!session) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  // Access session.user and return it
+  const user = session.user;
+
+  // ...your post request logic here
+  // const res = await request;
+
+  // gql mutation
+  const login = { a: "dfda", accessToken: "accessToken" };
+  // Set json response first
+  const response = NextResponse.json(
+    {
+      login,
+    },
+    { status: 200 }
+  );
+
+  // Then set a cookie
+  response.cookies.set({
+    name: "jwt",
+    value: login.accessToken,
     httpOnly: true,
     maxAge: 60 * 60,
   });

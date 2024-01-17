@@ -1,5 +1,7 @@
 import type { NextAuthConfig } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
+import { NextApiRequest, NextApiResponse } from 'next';
+import { cookies } from "next/headers";
 
 export const authConfig = {
   pages: {
@@ -12,6 +14,7 @@ export const authConfig = {
   callbacks: {
     // figure out the auth and redirect logic, and make changes accordingly
     authorized({ auth, request: { nextUrl } }) {
+      // async authorize(user: User, context: { req: any; res: NextApiResponse }) {
       const isLoggedIn = !!auth?.user;
       const isOnDashboard = nextUrl.pathname.startsWith("/dashboard");
       console.log("auth-config", { isLoggedIn, isOnDashboard, auth });
@@ -19,7 +22,7 @@ export const authConfig = {
         if (isLoggedIn) return true;
         return false; // Redirect unauthenticated users to login page
       } else if (isLoggedIn) {
-        // return Response.redirect(new URL("/dashboard", nextUrl));
+        return Response.redirect(new URL("/dashboard", nextUrl));
         // Set json response first
         const response = NextResponse.json(
           {
@@ -37,7 +40,8 @@ export const authConfig = {
           maxAge: 60 * 60,
         });
 
-        return response; // redirect to somewhere?
+        // return response.redirect("/dashboard");
+        // return NextResponse.status(302).Header('Location', '/dashboard');
       }
       return true;
     },

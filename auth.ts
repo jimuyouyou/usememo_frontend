@@ -1,6 +1,8 @@
 import NextAuth from 'next-auth';
 import { Session } from 'next-auth';
+import qs from "querystring";
 import type { TokenSet } from 'next-auth';
+import { cookies } from "next/headers";
 import Credentials from 'next-auth/providers/credentials';
 import bcrypt from 'bcrypt';
 import { sql } from '@vercel/postgres';
@@ -69,26 +71,34 @@ export const { auth, signIn, signOut } = NextAuth({
           console.log('0'.repeat(10), [passwordsMatch, data.login]);
           // const rs = Object.create({name: data.login.accessToken}, data.login.user);
           // console.log('01'.repeat(10), [passwordsMatch, data.login]);
+ 
+
+
+
           return user;
-        }
+            // secure: true,
+        };
+
+       
 
         console.log('Invalid credentials');
         return null;
       },
     }),
   ],
-  /*callbacks: {
-    async session(params) {
-      // Adjust the session callback to handle the provided parameters
-      console.log('10'.repeat(10));
-      const { session, token } = params as { session: Session & { user: any }; token: TokenSet };
+ 
+  callbacks: {
+    // async session(params) {
+    //   // Adjust the session callback to handle the provided parameters
+    //   console.log('10'.repeat(10));
+    //   const { session, token } = params as { session: Session & { user: any }; token: TokenSet };
       
-      if (token) {
-        session.user = token.user;
-      }
-      console.log('11'.repeat(10), session);
-      return session;
-    },
+    //   if (token) {
+    //     session.user = token.user;
+    //   }
+    //   console.log('11'.repeat(10), session);
+    //   return session;
+    // },
     async jwt({ token, user }) {
       console.log('2'.repeat(10), [token, user]);
       if (user) {
@@ -100,5 +110,5 @@ export const { auth, signIn, signOut } = NextAuth({
       console.log('3'.repeat(10), user);
       return token;
     },
-  },*/
+  },
 });

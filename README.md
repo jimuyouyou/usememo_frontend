@@ -45,6 +45,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 [React-GraphQL-JWT-Authentication-Example](https://github.com/bilguun-zorigt/React-GraphQL-JWT-Authentication-Example)
 
 ## Next.js Auth Login Logout
+- [next-auth](https://next-auth.js.org/configuration/options#session)
 - [adding-authentication](https://nextjs.org/learn/dashboard-app/adding-authentication)
 - [auth-custom-augment](https://next-auth.js.org/getting-started/typescript#module-augmentation)
 
