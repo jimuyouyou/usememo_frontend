@@ -1,5 +1,5 @@
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Header from '../ui/Header';
+import Footer from '../ui/Footer';
 
 const Privacy: React.FC = () => {
   return (

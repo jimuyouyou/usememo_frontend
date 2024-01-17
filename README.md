@@ -44,6 +44,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## JWT
 [React-GraphQL-JWT-Authentication-Example](https://github.com/bilguun-zorigt/React-GraphQL-JWT-Authentication-Example)
 
+## Next.js Auth Login Logout
+- [adding-authentication](https://nextjs.org/learn/dashboard-app/adding-authentication)
+- [auth-custom-augment](https://next-auth.js.org/getting-started/typescript#module-augmentation)
+
 ## Response vs NextResponse vs NextAPIResponse
 - Response: [general](https://developer.mozilla.org/en-US/docs/Web/API/Response)
 - NextResponse: [next general](https://nextjs.org/docs/pages/api-reference/functions/next-response)
