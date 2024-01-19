@@ -6,6 +6,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { gql } from "@/app/__generated__/gql";
+import { Folder } from "@/app/__generated__/graphql";
 
 import { fetchFilteredCustomers } from "@/app/lib/data";
 import CustomersTable from "@/app/ui/customers/table";
@@ -17,9 +18,9 @@ import { createApolloClient } from "@/app/lib/apolloClient";
 // };
 
 const client = createApolloClient();
-const CREATE_FOLDER = gql(/* GraphQL */ `
-  mutation CreateFolder($description: String!, $title: String!) {
-    createFolder(data: { description: $description, title: $title }) {
+const ALL_FOLDER = gql(/* GraphQL */ `
+  query UserFolders {
+    userFolders {
       ...FolderData
     }
   }
@@ -36,48 +37,41 @@ const CREATE_FOLDER = gql(/* GraphQL */ `
 function Section() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [createFolder, { error, data }] = useMutation(CREATE_FOLDER, {
-    variables: { title, description },
-  });
-  const router = useRouter();
-
-  const handleClick = () => {
-    createFolder();
-    router.push("/dashboard/vocabulary/folder/all");
-  };
+  const { loading, error, data } = useQuery(ALL_FOLDER);
+  console.log("3".repeat(10), data);
 
   return (
     <section>
       <h3>New Folder</h3>
-      <div>
-        <label htmlFor="title">Title</label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          value={title}
-          placeholder="Input your folder name here"
-          onChange={(e) => {
-            setTitle(e.target.value);
-          }}
-        />
-      </div>
-      <div>
-        <label htmlFor="description">Description</label>
-        <input
-          type="text"
-          title="description"
-          name="description"
-          value={description}
-          placeholder="Input your folder description here"
-          onChange={(e) => {
-            setDescription(e.target.value);
-          }}
-        />
-      </div>
-      <div>
-        <button onClick={handleClick}>Create</button>
-      </div>
+      <table className="w-full table-fixed">
+        <thead>
+          <tr className="bg-gray-100">
+            <th className="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">
+              Name
+            </th>
+            <th className="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody className="bg-white">
+          {data &&
+            data.userFolders &&
+            data.userFolders.length > 0 &&
+            data.userFolders.map(({ id, title, description }: any) => {
+              return (
+                <tr key={id}>
+                  <td className="py-4 px-6 border-b border-gray-200">
+                    {title}
+                  </td>
+                  <td className="py-4 px-6 border-b border-gray-200">
+                    {description}
+                  </td>
+                </tr>
+              );
+            })}
+        </tbody>
+      </table>
     </section>
   );
 }
