@@ -22,7 +22,7 @@ export async function fetchRevenue() {
         revenue: 120,
       },
       {
-        month: "Jan",
+        month: "Feb",
         revenue: 120,
       },
     ];
@@ -52,12 +52,14 @@ export async function fetchLatestInvoices() {
         id: "dds",
         customer_id: "ergdd",
         status: "paid",
+        image_url: "/next.svg"
       },
       {
         amount: 34,
-        id: "dds",
+        id: "dds2",
         customer_id: "ergdd",
         status: "paid",
+        image_url: "/next.svg"
       },
     ];
 
