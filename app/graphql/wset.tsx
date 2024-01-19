@@ -55,9 +55,11 @@ export const ONE_WSET = gql(/* GraphQL */ `
 // create a new wset
 export const CREATE_FOLDER = gql(/* GraphQL */ `
   mutation CreateWSet(
-    $description: String
-    $title: String!
-    $folderId: String!
+    data: {
+      $description: String
+      $title: String!
+      $folderId: String!
+    }
   ) {
     createWset(
       data: { description: $description, title: $title, folderId: $folderId }

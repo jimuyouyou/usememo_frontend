@@ -332,11 +332,6 @@ export type QueryUserPostsArgs = {
 };
 
 
-export type QueryUserWsetsArgs = {
-  id: Scalars['String']['input'];
-};
-
-
 export type QueryWordArgs = {
   id: Scalars['String']['input'];
 };
