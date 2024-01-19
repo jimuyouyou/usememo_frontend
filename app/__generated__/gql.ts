@@ -13,7 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\nmutation User {\n  login(data: { email: \"lisa@simpson.com\", password: \"secret42\" }) {\n    ...AuthTokens\n  }\n}\n\nfragment UserData on User {\n  id\n  email\n}\n\nfragment AuthTokens on Auth {\n  accessToken\n  refreshToken\n  user {\n    ...UserData\n  }\n}\n": types.UserDocument,
+    "\n  mutation User {\n    login(data: { email: \"lisa@simpson.com\", password: \"secret42\" }) {\n      ...AuthTokens\n    }\n  }\n\n  fragment UserData on User {\n    id\n    email\n  }\n\n  fragment AuthTokens on Auth {\n    accessToken\n    refreshToken\n    user {\n      ...UserData\n    }\n  }\n": types.UserDocument,
+    "\n  mutation CreateFolder($description: String!, $title: String!) {\n    createFolder(data: { description: $description, title: $title }) {\n      ...FolderData\n    }\n  }\n\n  fragment FolderData on Folder {\n    id\n    createdAt\n    updatedAt\n    title\n    description\n  }\n": types.CreateFolderDocument,
     "\n  query UserPosts {\n    userPosts(id: \"clrctnggg0000oprtx7qti2vr\") {\n      ...PostData\n    }\n  }\n\n  fragment PostData on Post {\n    id\n    createdAt\n    updatedAt\n    published\n    title\n    content\n  }\n": types.UserPostsDocument,
 };
 
@@ -34,7 +35,11 @@ export function gql(source: string): unknown;
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\nmutation User {\n  login(data: { email: \"lisa@simpson.com\", password: \"secret42\" }) {\n    ...AuthTokens\n  }\n}\n\nfragment UserData on User {\n  id\n  email\n}\n\nfragment AuthTokens on Auth {\n  accessToken\n  refreshToken\n  user {\n    ...UserData\n  }\n}\n"): (typeof documents)["\nmutation User {\n  login(data: { email: \"lisa@simpson.com\", password: \"secret42\" }) {\n    ...AuthTokens\n  }\n}\n\nfragment UserData on User {\n  id\n  email\n}\n\nfragment AuthTokens on Auth {\n  accessToken\n  refreshToken\n  user {\n    ...UserData\n  }\n}\n"];
+export function gql(source: "\n  mutation User {\n    login(data: { email: \"lisa@simpson.com\", password: \"secret42\" }) {\n      ...AuthTokens\n    }\n  }\n\n  fragment UserData on User {\n    id\n    email\n  }\n\n  fragment AuthTokens on Auth {\n    accessToken\n    refreshToken\n    user {\n      ...UserData\n    }\n  }\n"): (typeof documents)["\n  mutation User {\n    login(data: { email: \"lisa@simpson.com\", password: \"secret42\" }) {\n      ...AuthTokens\n    }\n  }\n\n  fragment UserData on User {\n    id\n    email\n  }\n\n  fragment AuthTokens on Auth {\n    accessToken\n    refreshToken\n    user {\n      ...UserData\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation CreateFolder($description: String!, $title: String!) {\n    createFolder(data: { description: $description, title: $title }) {\n      ...FolderData\n    }\n  }\n\n  fragment FolderData on Folder {\n    id\n    createdAt\n    updatedAt\n    title\n    description\n  }\n"): (typeof documents)["\n  mutation CreateFolder($description: String!, $title: String!) {\n    createFolder(data: { description: $description, title: $title }) {\n      ...FolderData\n    }\n  }\n\n  fragment FolderData on Folder {\n    id\n    createdAt\n    updatedAt\n    title\n    description\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

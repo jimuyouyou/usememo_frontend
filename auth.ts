@@ -60,7 +60,7 @@ export const { auth, signIn, signOut } = NextAuth({
 
           // gql mutation
           const { data } = await apolloClient.mutate({ mutation: LOG_IN });
-          console.log("apollo data", data);
+          // console.log("apollo data", data);
 
           // const user = await getUser(email);
           const user = { email, password, name: data.login.accessToken  } ;

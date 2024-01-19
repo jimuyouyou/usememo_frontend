@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
 
   // gql mutation
   const { data } = await apolloClient.mutate({ mutation: LOG_IN });
-  console.log("apollo data", data);
+  // console.log("apollo data", data);
 
   // Set json response first
   const response = NextResponse.json(
