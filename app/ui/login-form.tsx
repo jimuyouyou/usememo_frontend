@@ -46,7 +46,8 @@ export default function LoginForm() {
     // set jwt token into following gql headers
     const data = await res.json();
     if (data && data.accessToken) {
-      setAccessToken();
+      console.log('1'.repeat(10), data);
+      setAccessToken(data.accessToken);
       router.push("/dashboard");
     }
     console.log("data", data);

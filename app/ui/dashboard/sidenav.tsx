@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import NavLinks from "@/app/ui/dashboard/nav-links";
@@ -25,7 +25,7 @@ export default function SideNav() {
         <form
           action={async () => {
             // "use server";
-            await fetch("api/user/logout");
+            fetch("api/user/logout");
             router.push("/login");
             // await signOut();
           }}
