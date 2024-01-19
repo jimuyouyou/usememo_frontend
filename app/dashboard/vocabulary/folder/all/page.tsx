@@ -18,7 +18,7 @@ import { createApolloClient } from "@/app/lib/apolloClient";
 // };
 
 const client = createApolloClient();
-const ALL_FOLDER = gql(/* GraphQL */ `
+export const ALL_FOLDER = gql(/* GraphQL */ `
   query UserFolders {
     userFolders {
       ...FolderData

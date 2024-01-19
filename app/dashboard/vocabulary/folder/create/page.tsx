@@ -16,6 +16,7 @@ import { createApolloClient } from "@/app/lib/apolloClient";
 //   title: "Vocabulary",
 // };
 
+import {ALL_FOLDER} from '@/app/dashboard/vocabulary/folder/all/page'
 const client = createApolloClient();
 const CREATE_FOLDER = gql(/* GraphQL */ `
   mutation CreateFolder($description: String!, $title: String!) {
@@ -38,6 +39,7 @@ function Section() {
   const [description, setDescription] = useState("");
   const [createFolder, { error, data }] = useMutation(CREATE_FOLDER, {
     variables: { title, description },
+    refetchQueries: [{ query: ALL_FOLDER }],
   });
   const router = useRouter();
 
