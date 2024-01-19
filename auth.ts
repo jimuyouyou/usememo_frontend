@@ -1,7 +1,6 @@
 import NextAuth from 'next-auth';
 import { Session } from 'next-auth';
 import qs from "querystring";
-import type { TokenSet } from 'next-auth';
 import { cookies } from "next/headers";
 import Credentials from 'next-auth/providers/credentials';
 import bcrypt from 'bcrypt';
@@ -12,29 +11,10 @@ import { authConfig } from './auth.config';
 import { NextRequest, NextResponse } from "next/server";
 import { gql } from "@apollo/client";
 import { createApolloClient } from "@/app/lib/apolloClient";
-
+import { LOG_IN } from "@/app/graphql/user";
 const apolloClient = createApolloClient();
 
-const LOG_IN = gql`
-  mutation User {
-    login(data: { email: "lisa@simpson.com", password: "secret42" }) {
-      ...AuthTokens
-    }
-  }
 
-  fragment UserData on User {
-    id
-    email
-  }
-
-  fragment AuthTokens on Auth {
-    accessToken
-    refreshToken
-    user {
-      ...UserData
-    }
-  }
-`;
 
 async function getUser(email: string): Promise<User | undefined> {
   try {

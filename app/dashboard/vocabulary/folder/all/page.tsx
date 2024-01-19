@@ -5,34 +5,18 @@ import { useRouter } from "next/navigation";
 import { useQuery, useMutation } from "@apollo/client";
 import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import { gql } from "@/app/__generated__/gql";
-import { Folder } from "@/app/__generated__/graphql";
 
 import { fetchFilteredCustomers } from "@/app/lib/data";
 import CustomersTable from "@/app/ui/customers/table";
 import TopNav from "@/app/ui/vocabulary/topnav";
 import { logApolloDev } from "@/app/lib/apolloDev";
 import { createApolloClient } from "@/app/lib/apolloClient";
+import { ALL_FOLDER } from "@/app/graphql/folder";
 // export const metadata: Metadata = {
 //   title: "Vocabulary",
 // };
 
 const client = createApolloClient();
-export const ALL_FOLDER = gql(/* GraphQL */ `
-  query UserFolders {
-    userFolders {
-      ...FolderData
-    }
-  }
-
-  fragment FolderData on Folder {
-    id
-    createdAt
-    updatedAt
-    title
-    description
-  }
-`);
 
 function Section() {
   const [title, setTitle] = useState("");

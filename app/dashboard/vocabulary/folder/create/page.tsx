@@ -12,27 +12,13 @@ import CustomersTable from "@/app/ui/customers/table";
 import TopNav from "@/app/ui/vocabulary/topnav";
 import { logApolloDev } from "@/app/lib/apolloDev";
 import { createApolloClient } from "@/app/lib/apolloClient";
+import { CREATE_FOLDER, ALL_FOLDER } from "@/app/graphql/folder";
+
 // export const metadata: Metadata = {
 //   title: "Vocabulary",
 // };
 
-import {ALL_FOLDER} from '@/app/dashboard/vocabulary/folder/all/page'
 const client = createApolloClient();
-const CREATE_FOLDER = gql(/* GraphQL */ `
-  mutation CreateFolder($description: String!, $title: String!) {
-    createFolder(data: { description: $description, title: $title }) {
-      ...FolderData
-    }
-  }
-
-  fragment FolderData on Folder {
-    id
-    createdAt
-    updatedAt
-    title
-    description
-  }
-`);
 
 function Section() {
   const [title, setTitle] = useState("");

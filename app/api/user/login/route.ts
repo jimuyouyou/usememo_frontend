@@ -3,29 +3,9 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest, NextResponse } from "next/server";
 import { gql } from "@apollo/client";
 import { createApolloClient } from "../../../lib/apolloClient";
+import { LOG_IN } from "@/app/graphql/user";
 
 const apolloClient = createApolloClient();
-
-const LOG_IN = gql`
-  mutation User {
-    login(data: { email: "lisa@simpson.com", password: "secret42" }) {
-      ...AuthTokens
-    }
-  }
-
-  fragment UserData on User {
-    id
-    email
-  }
-
-  fragment AuthTokens on Auth {
-    accessToken
-    refreshToken
-    user {
-      ...UserData
-    }
-  }
-`;
 
 export async function POST(request: NextRequest) {
   // ...your post request logic here
@@ -56,7 +36,7 @@ export async function POST(request: NextRequest) {
 
 export async function GET(req: NextApiRequest, res: NextApiResponse) {
   // res.
-  const session = await getSession({ req } as GetSessionParams); // 
+  const session = await getSession({ req } as GetSessionParams); //
   console.log("s0".repeat(10), session);
   if (!session) {
     return res.status(401).json({ error: "Unauthorized" });
