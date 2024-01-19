@@ -17,6 +17,7 @@ import clsx from 'clsx';
 
 const links = [
   { name: 'New Set', href: '/dashboard/vocabulary/set/create', icon: HomeIcon },
+  { name: 'All Sets', href: '/dashboard/vocabulary/folder/update', icon: DocumentTextIcon },
   { name: 'New Folder', href: '/dashboard/vocabulary/folder/create', icon: DocumentTextIcon },
   { name: 'All Folders', href: '/dashboard/vocabulary/folder/all', icon: DocumentTextIcon },
   
